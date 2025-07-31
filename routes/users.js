@@ -26,13 +26,15 @@ let users = [
 // GET request: Retrieve all users
 router.get("/",(req,res)=>{
   // Copy the code here
-  res.send("Yet to be implemented")//This line is to be replaced with actual return value
+  res.send(users)//This line is to be replaced with actual return value
 });
 
 // GET by specific ID request: Retrieve a single user with email ID
 router.get("/:email",(req,res)=>{
   // Copy the code here
-  res.send("Yet to be implemented")//This line is to be replaced with actual return value
+  let email=req.params.email
+  let emails=users.filter(item=>item.email===email)
+  res.send(emails)//This line is to be replaced with actual return value
 });
 
 
