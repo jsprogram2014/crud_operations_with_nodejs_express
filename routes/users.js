@@ -33,7 +33,7 @@ router.get("/",(req,res)=>{
 router.get("/:email",(req,res)=>{
   // Copy the code here
   let email=req.params.email
-  let emails=users.filter(item=>item.email===email)
+  let emails=users.filter(user=>user.email===email)
   res.send(emails)//This line is to be replaced with actual return value
 });
 
@@ -49,7 +49,20 @@ router.post("/",(req,res)=>{
 // PUT request: Update the details of a user by email ID
 router.put("/:email", (req, res) => {
   // Copy the code here
-  res.send("Yet to be implemented")//This line is to be replaced with actual return value
+  const email=req.params.email
+  let filtered_users=users.filter(user=>user.email===email)
+
+  if(filtered_users.length>0){
+    let filtered_user=filtered_users[0]
+    const dob=req.query.DOB
+
+    filtered_user.DOB=dob
+    users=users.filter(user=>user.email!==email)
+    users.push(filtered_user)
+
+    res.send('DOB updated successfully')
+  }
+  //This line is to be replaced with actual return value
 });
 
 
