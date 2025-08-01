@@ -10,8 +10,8 @@ let users = [
         DOB:"22-01-1990",
     },
     {
-        firstName: "John",
-        lastName: "smith",
+        firstName: "Will",
+        lastName: "wick",
         email:"johnsmith@gamil.com",
         DOB:"21-07-1983",
     },
@@ -26,7 +26,7 @@ let users = [
 // GET request: Retrieve all users
 router.get("/",(req,res)=>{
   // Copy the code here
-  res.send(users)//This line is to be replaced with actual return value
+  res.send(JSON.stringify({users},null,4))//This line is to be replaced with actual return value
 });
 
 // GET by specific ID request: Retrieve a single user with email ID
@@ -41,7 +41,7 @@ router.get("/:email",(req,res)=>{
 // POST request: Create a new user
 router.post("/",(req,res)=>{
   // Copy the code here
-  users.push(req.query)
+  users.push(req.body)
   res.send("Posted sucessfully")//This line is to be replaced with actual return value
 });
 
@@ -78,5 +78,13 @@ router.delete("/:email", (req, res) => {
   res.send(`The User with email ${email} got deleted`)
 
 });
+
+//code to receive the users by same last name
+
+router.get('/same/:lastname',(req,res)=>{
+  const lastName=req.params.lastname
+  let filtered_users=users.filter(user=>user.lastName===lastName)
+  res.send(filtered_users)
+})
 
 module.exports=router;
