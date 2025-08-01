@@ -62,14 +62,21 @@ router.put("/:email", (req, res) => {
 
     res.send('DOB updated successfully')
   }
+  else{
+    res.send('Cant find user with this email')
+  }
   //This line is to be replaced with actual return value
 });
 
 
 // DELETE request: Delete a user by email ID
 router.delete("/:email", (req, res) => {
-  // Copy the code here
-  res.send("Yet to be implemented")//This line is to be replaced with actual return value
+  const email=req.params.email
+
+  users=users.filter(user=>user.email!==email)
+
+  res.send(`The User with email ${email} got deleted`)
+
 });
 
 module.exports=router;
